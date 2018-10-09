@@ -61,6 +61,13 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
+@app.route('/question/')
+def question():
+    if request.method == 'GET':
+        return render_template('question.html')
+    else:
+        pass
+
 @app.context_processor
 def my_context_processor():
     user_id = session.get('user_id')
