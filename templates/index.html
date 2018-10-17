@@ -4,22 +4,26 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
 {% endblock %}
 {% block main %}
-    <ul>
+    <ul class="question-list-group">
+    {% for question in questions %}
         <li>
             <div class="avatar-group">
                 <img src="{{ url_for('static',filename='images/zhiliao.png') }}"
                      alt="" class="avatar">
             </div>
             <div class="question-group">
-                <p class="question-title"><a href="#">知了课堂python学院</a></p>
-                <p class="question-content">首先不是，我之前从来没有提过任何一个手机类的话题我之前从来
-                    没有提过任我之前从来没有提过任我之前从来没有提过任</p>
+                <p class="question-title"><a href="#">{{ question.title }}</a></p>
+                <p class="question-content">{{ question.content }}</p>
                 <div class="question-info">
-                    <span class="question-author">知了课堂</span>
-                    <span class="question-time">2018-10-09 23:59:18</span>
+                    <span class="question-author">{{ question.author.username }}</span>
+                    <span class="question-time">{{ question.create_time }}</span>
                 </div>
             </div>
         </li>
+
+    {% endfor %}
+
+
         <li>
             <div class="avatar-group">
                 <img src="{{ url_for('static',filename='images/zhiliao.png') }}"
