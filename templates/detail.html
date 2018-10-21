@@ -25,9 +25,17 @@
             <button class="btn-primary">立即评论</button>
         </div>
     </form>
-    <ul>
+    <ul class="answer-list">
         {% for answer  in question.answers %}
-            <li>{{ answer.content }}</li>
+            <li>
+                <div class="user-info">
+                    <img src="{{ url_for('static',filename='images/zhiliao.png') }}"
+                         alt="" class="avatar">
+                    <span class="username">{{ answer.author.username }}</span>
+                    <span class="create-time">2018-10-21</span>
+                </div>
+                <p class="answer-content">{{ answer.content }}</p>
+            </li>
         {% endfor %}
 
     </ul>
