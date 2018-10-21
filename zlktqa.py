@@ -3,7 +3,7 @@ __author__ = '54h50m'
 
 from flask import Flask,render_template,request,redirect,url_for,session
 import config
-from models import User,Question
+from models import User,Question,Answer
 from exts import db
 from decorators import login_required
 
@@ -89,8 +89,20 @@ def detail(question_id):
     return render_template('detail.html',question=question_model)
 
 @app.route('/add_answer/',methods=['Post'])
+@login_required
 def add_answer():
     content = request.form.get('answer_content')
+    question_id = request.form.get('question_id')
+
+    answer = Answer(content=content)
+    user_id = session['user_id']
+    user = User.query.filter(User.id == user_id).first()
+    answer.author = user
+    question = Question.query.filter(Question.id == question_id).first()
+    answer.question = question
+    db.session.add(answer)
+    db.session.commit()
+    return redirect(url_for('detail',question_id=question.id))
 
 @app.context_processor
 def my_context_processor():
