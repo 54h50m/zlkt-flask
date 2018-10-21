@@ -88,6 +88,10 @@ def detail(question_id):
     question_model = Question.query.filter(Question.id == question_id).first()
     return render_template('detail.html',question=question_model)
 
+@app.route('/add_answer/',methods=['Post'])
+def add_answer():
+    content = request.form.get('answer_content')
+
 @app.context_processor
 def my_context_processor():
     user_id = session.get('user_id')
